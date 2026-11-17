@@ -1,6 +1,8 @@
 import currencies from "./data/currencies.ts";
 import { useState } from "react";
 import "./App.css";
+import Footer from "./component/footer.tsx";
+import Currency from "./component/Currency.tsx";
 
 export default function App() {
   // On créer un state et on passe sa valeur par défaut
@@ -12,11 +14,11 @@ export default function App() {
   // nous appellons directement la variable dans notre JSX
   const listCurrencies = currencies.map((currency) => {
     return (
-      <li key={currency.code} className="currency">
-        <button type="button" className="currency__button" onClick={() => setSelectedCurrency(currency)}>
-          {currency.description}
-        </button>
-      </li>
+    <Currency
+      key={currency.code}
+      currency={currency}
+      onSelect={setSelectedCurrency}
+    />
     );
   });
 
@@ -30,10 +32,9 @@ export default function App() {
       {/* Nous appelons notre boucle .map pour générer nos li / bouton */}
       <ul className="currencies">{listCurrencies}</ul>
 
-      <footer className="result">
-        <div className="result__amount">{selectedCurrency.rate}</div>
-        <div className="result__currency">{selectedCurrency.description}</div>
-      </footer>
+
+        <Footer currency={selectedCurrency} />
+
     </div>
   );
 }
