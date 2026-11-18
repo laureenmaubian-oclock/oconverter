@@ -1,11 +1,12 @@
-import type { Currency } from "../data/currencies.ts";
+
 import { useState } from "react"
 
 interface FooterProps {
-    currency: Currency;
+    rate: number;
+    description: string;
 }
 
-export default function Footer({ currency }: FooterProps) {
+export default function Footer( props: FooterProps) {
     const [isRounded, setIsRounded] = useState(false);
 
 
@@ -13,12 +14,21 @@ export default function Footer({ currency }: FooterProps) {
 
     return (
         <footer className="result">
-            <div className="result__amount">{isRounded ? currency.rate.toFixed(2) : currency.rate}</div>
-            <div className="result__currency">{currency.description}</div>
+            <div className="result__amount">{isRounded ? props.rate : props.rate.toFixed(2)}</div>
+            <div className="result__currency">{props.description}</div>
 
-            <button type= "button" onClick={() => setIsRounded(!isRounded)}>
-                {isRounded ? 'Afficher le taux exact' : 'Arrondir le taux'}
+            <button
+            type ="button"
+            className="result__button"
+            onClick={() => {
+                setIsRounded(!isRounded);
+            }}
+            >
+
+            {isRounded ? "Afficher le taux" : "Cacher le taux"}
+
             </button>
+
         </footer>
     );
 }

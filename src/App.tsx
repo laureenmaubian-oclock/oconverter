@@ -14,11 +14,11 @@ export default function App() {
   // nous appellons directement la variable dans notre JSX
   const listCurrencies = currencies.map((currency) => {
     return (
-    <Currency
-      key={currency.code}
-      currency={currency}
-      onSelect={setSelectedCurrency}
-    />
+      <Currency
+        key={currency.code}
+        currency={currency}
+        onSelect={setSelectedCurrency}
+      />
     );
   });
 
@@ -33,7 +33,10 @@ export default function App() {
       <ul className="currencies">{listCurrencies}</ul>
 
 
-        <Footer currency={selectedCurrency} />
+      <Footer
+        rate={selectedCurrency.rate}
+        description={selectedCurrency.description}
+      />
 
     </div>
   );
